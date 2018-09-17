@@ -132,6 +132,7 @@ def pad(sentences, longest):
 
 pad(clean_sentences, longest_num)
 
+
 #print(clean_sentences[2])
 # print(clean_sentences)
 
