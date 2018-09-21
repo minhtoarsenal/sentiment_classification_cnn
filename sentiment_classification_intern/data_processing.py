@@ -7,7 +7,7 @@ import emoji
 import string
 from nltk import sent_tokenize
 from nltk import word_tokenize
-#from keras.preprocessing.sequence import pad_sequences
+
 
 # READ DATA
 train_data = pd.read_csv('Data/train.txt', sep="### ", header=None, engine='python')
@@ -59,8 +59,6 @@ for i in range(len(all_sentences)):
         boW.append(word.lower())  # BoW
 
 
-print('number of words in bag of words is: %d' % len(boW))
-
 # remove too long words and stop words
 long_words = []
 for ch in boW:
@@ -97,6 +95,46 @@ for sentence in clean_sentences:
             sentence.remove(word)
 
 
+for i in range(len(clean_sentences)):
+    clean_sentences[i] = [word for word in clean_sentences[i] if word not in vnese_stop_words]
+
+
+def check_stopwords(sentence):
+    for word in sentence:
+        if word in vnese_stop_words:
+            return True
+    return False
+
+count = 0
+
+for i in range(len(clean_sentences)):
+    if check_stopwords(clean_sentences[i]):
+        count += 1
+
+print('how many stopwords in all sentences: %d' %count)
+
+for i in range(len(clean_sentences)):
+    clean_sentences[i] = [word.lower() if any(x.isupper() for x in word) else word for word in clean_sentences[i]]
+
+clean_sentences[1]
+
+
+def check_upper(sentence):
+    for word in sentence:
+        for x in word:
+            if x.isupper():
+                return True
+    return False
+
+
+count_upper = 0
+for i in range(len(clean_sentences)):
+    if check_upper(clean_sentences[i]):
+        count_upper += 1
+
+print('how many upper words: %d' %count_upper)
+
+
 def longest_sentence(sentences):
     position = 0
     longest = 0
@@ -130,11 +168,35 @@ def pad(sentences, longest):
                 sentences[i] += '0'
 
 
-pad(clean_sentences, longest_num)
+#pad(clean_sentences, longest_num)
 
 
-#print(clean_sentences[2])
-# print(clean_sentences)
+data = []
+
+window_size = 2
+
+for sentence in clean_sentences:
+    for word_index, word in enumerate(sentence):
+        for nb_word in sentence[max(word_index - window_size, 0) : min(word_index + window_size, len(sentence)) + 1]:
+            if nb_word != word:
+                data.append([word, nb_word])
+
+vocab_size = len(boW_)
+
+
+def to_one_hot(index, vocab_size):
+    temp = np.zeros(vocab_size)
+    temp[index] = 1
+    return temp
+
+
+x_train = []
+y_train = []
+
+for data_word in data:
+    x_train.append(to_one_hot(word2int[data_word[0]], vocab_size))
+    y_train.append(to_one_hot(word2int[data_word[1]], vocab_size))
+
 
 
 
