@@ -65,14 +65,14 @@ for ch in boW:
     if len(ch) > 14:
         long_words.append(ch)
 
-vnese_stop_words = ['bị','bởi','cả','các','cái','cần','càng','chỉ','chiếc','cho','chứ','chưa','chuyện','có','có_thể','cứ',
-                    'của','cùng','cũng','đã','đang','đây','để','đến_nỗi','đều','điều','do','đó','được','dưới','gì',
-                    'khi','không','là','lại','lên','lúc','mà','mỗi','một_cách','này','nên','nếu','ngay','nhiều','như',
-                    'nhưng','những','nơi','nữa','phải','qua','ra','rằng','rất','rồi','sau','sẽ','so','sự','tại','theo',
-                    'thì','trên','trước','từ','từng','và','vẫn','vào','vậy','vì','việc','với','vừa']
+#vnese_stop_words = ['bị','bởi','cả','các','cái','cần','càng','chỉ','chiếc','cho','chứ','chưa','chuyện','có','có_thể','cứ',
+#                    'của','cùng','cũng','đã','đang','đây','để','đến_nỗi','đều','điều','do','đó','được','dưới','gì',
+#                    'khi','không','là','lại','lên','lúc','mà','mỗi','một_cách','này','nên','nếu','ngay','nhiều','như',
+#                    'nhưng','những','nơi','nữa','phải','qua','ra','rằng','rất','rồi','sau','sẽ','so','sự','tại','theo',
+#                    'thì','trên','trước','từ','từng','và','vẫn','vào','vậy','vì','việc','với','vừa']
 
 
-boW_ = [word for word in boW if word not in vnese_stop_words not in long_words]
+boW_ = [word for word in boW if word not in long_words]
 print('number of words in bag of words now is: %d' % len(boW_))
 
 
@@ -95,28 +95,26 @@ for sentence in clean_sentences:
             sentence.remove(word)
 
 
-for i in range(len(clean_sentences)):
-    clean_sentences[i] = [word for word in clean_sentences[i] if word not in vnese_stop_words]
+#for i in range(len(clean_sentences)):
+#    clean_sentences[i] = [word for word in clean_sentences[i] if word not in vnese_stop_words]
 
 
-def check_stopwords(sentence):
-    for word in sentence:
-        if word in vnese_stop_words:
-            return True
-    return False
-
-count = 0
-
-for i in range(len(clean_sentences)):
-    if check_stopwords(clean_sentences[i]):
-        count += 1
-
-print('how many stopwords in all sentences: %d' %count)
+# def check_stopwords(sentence):
+#     for word in sentence:
+#         if word in vnese_stop_words:
+#             return True
+#     return False
+#
+# count = 0
+#
+# for i in range(len(clean_sentences)):
+#     if check_stopwords(clean_sentences[i]):
+#         count += 1
+#
+# print('how many stopwords in all sentences: %d' %count)
 
 for i in range(len(clean_sentences)):
     clean_sentences[i] = [word.lower() if any(x.isupper() for x in word) else word for word in clean_sentences[i]]
-
-clean_sentences[1]
 
 
 def check_upper(sentence):
@@ -181,13 +179,18 @@ for sentence in clean_sentences:
             if nb_word != word:
                 data.append([word, nb_word])
 
+
+# for data_word in data:
+#     print(data_word[0])
+
+
 vocab_size = len(boW_)
 
 
 def to_one_hot(index, vocab_size):
-    temp = np.zeros(vocab_size)
-    temp[index] = 1
-    return temp
+   temp = np.zeros(vocab_size)
+   temp[index] = 1
+   return temp
 
 
 x_train = []
@@ -197,6 +200,8 @@ for data_word in data:
     x_train.append(to_one_hot(word2int[data_word[0]], vocab_size))
     y_train.append(to_one_hot(word2int[data_word[1]], vocab_size))
 
+for data_word in data:
+   print(to_one_hot(word2int[data_word[0]], vocab_size))
 
 
 
