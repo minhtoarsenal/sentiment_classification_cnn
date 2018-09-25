@@ -198,10 +198,12 @@ y_train = []
 
 for data_word in data:
     x_train.append(to_one_hot(word2int[data_word[0]], vocab_size))
-    y_train.append(to_one_hot(word2int[data_word[1]], vocab_size))
+    y_train.append(to_one_hot(word2int[data_word[1].encode('ascii', 'ignore')], vocab_size))
 
 for data_word in data:
    print(to_one_hot(word2int[data_word[0]], vocab_size))
+
+
 
 
 
