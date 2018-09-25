@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a246db8f-cccd-42f3-a6a1-90f00c598d67" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,12 +36,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="715" />
+          <entry key="py" value="729" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="715" />
+          <entry key="Python" value="729" />
         </counts>
       </usages-collector>
     </session>
@@ -53,11 +51,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/data_processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
+            <state relative-caret-position="283">
+              <caret line="200" column="108" selection-start-line="200" selection-start-column="108" selection-end-line="200" selection-end-column="108" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1537845364740" expanded="true" signature="5591:5597" ph="..." />
+                <marker date="1537846024445" expanded="true" signature="5607:5613" ph="..." />
               </folding>
             </state>
           </provider>
@@ -208,11 +206,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/data_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
+        <state relative-caret-position="283">
+          <caret line="200" column="108" selection-start-line="200" selection-start-column="108" selection-end-line="200" selection-end-column="108" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1537845364740" expanded="true" signature="5591:5597" ph="..." />
+            <marker date="1537846024445" expanded="true" signature="5607:5613" ph="..." />
           </folding>
         </state>
       </provider>
