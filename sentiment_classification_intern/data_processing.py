@@ -58,6 +58,7 @@ for i in range(len(all_sentences)):
     for word in tokenized:
         boW.append(word.lower())  # BoW
 
+boW = list(set(boW))
 
 # remove too long words and stop words
 long_words = []
@@ -72,15 +73,15 @@ for ch in boW:
 #                    'thì','trên','trước','từ','từng','và','vẫn','vào','vậy','vì','việc','với','vừa']
 
 
-boW_ = [word for word in boW if word not in long_words]
-print('number of words in bag of words now is: %d' % len(boW_))
+boW = [word for word in boW if word not in long_words]
+print('number of words in bag of words now is: %d' % len(boW))
 
 
 word2int = {}
 int2word = {}
 
 
-for i, word in enumerate(boW_):
+for i, word in enumerate(boW):
     word2int[word] = i
     int2word[i] = word
 
@@ -117,46 +118,46 @@ for i in range(len(clean_sentences)):
     clean_sentences[i] = [word.lower() if any(x.isupper() for x in word) else word for word in clean_sentences[i]]
 
 
-def check_upper(sentence):
-    for word in sentence:
-        for x in word:
-            if x.isupper():
-                return True
-    return False
+# def check_upper(sentence):
+#     for word in sentence:
+#         for x in word:
+#             if x.isupper():
+#                 return True
+#     return False
 
 
-count_upper = 0
-for i in range(len(clean_sentences)):
-    if check_upper(clean_sentences[i]):
-        count_upper += 1
-
-print('how many upper words: %d' %count_upper)
-
-
-def longest_sentence(sentences):
-    position = 0
-    longest = 0
-    for num, sentence in enumerate(sentences):
-        if len(sentences[num]) > longest:
-            longest = len(sentences[num])
-            position = num
-
-    return position, longest
+# count_upper = 0
+# for i in range(len(clean_sentences)):
+#     if check_upper(clean_sentences[i]):
+#         count_upper += 1
+#
+# print('how many upper words: %d' %count_upper)
 
 
-def longest_word(sentences):
-    longest_word_length = 0
-    long_word = ""
-    for sentence in sentences:
-        for word in sentence:
-            if len(word) > longest_word_length:
-                longest_word_length = len(word)
-                long_word = word
-    return long_word
+# def longest_sentence(sentences):
+#     position = 0
+#     longest = 0
+#     for num, sentence in enumerate(sentences):
+#         if len(sentences[num]) > longest:
+#             longest = len(sentences[num])
+#             position = num
+#
+#     return position, longest
 
-print('the longest word is %s' %(longest_word(clean_sentences)))
-pos, longest_num = longest_sentence(clean_sentences)
-print('pos is %d, longest_num is %d' % longest_sentence(clean_sentences))
+
+# def longest_word(sentences):
+#     longest_word_length = 0
+#     long_word = ""
+#     for sentence in sentences:
+#         for word in sentence:
+#             if len(word) > longest_word_length:
+#                 longest_word_length = len(word)
+#                 long_word = word
+#     return long_word
+#
+# print('the longest word is %s' %(longest_word(clean_sentences)))
+# pos, longest_num = longest_sentence(clean_sentences)
+# print('pos is %d, longest_num is %d' % longest_sentence(clean_sentences))
 #print(clean_sentences[2135])
 
 def pad(sentences, longest):
@@ -184,7 +185,7 @@ for sentence in clean_sentences:
 #     print(data_word[0])
 
 
-vocab_size = len(boW_)
+vocab_size = len(boW)
 
 
 def to_one_hot(index, vocab_size):
