@@ -77,16 +77,16 @@ boW = [word for word in boW if word not in long_words]
 print('number of words in bag of words now is: %d' % len(boW))
 
 
-word2int = {}
-int2word = {}
-
-
-for i, word in enumerate(boW):
-    word2int[word.encode('ascii','ignore').decode('utf-8')] = i
-    int2word[i] = word
-
-word2int.update({'0': 0})  # for padding sentences with 0
-int2word.update({'0': '0'})  # for padding sentences with 0
+# word2int = {}
+# int2word = {}
+#
+#
+# for i, word in enumerate(boW):
+#     word2int[word.encode('ascii', 'ignore').decode('utf-8')] = i
+#     int2word[i] = word
+#
+# word2int.update({'0': 0})  # for padding sentences with 0
+# int2word.update({'0': '0'})  # for padding sentences with 0
 
 
 # MODIFY AND PADDING CLEAN SENTENCES
@@ -176,7 +176,7 @@ window_size = 2
 
 for sentence in clean_sentences:
     for word_index, word in enumerate(sentence):
-        for nb_word in sentence[max(word_index - window_size, 0) : min(word_index + window_size, len(sentence)) + 1]:
+        for nb_word in sentence[max(word_index - window_size, 0): min(word_index + window_size, len(sentence)) + 1]:
             if nb_word != word:
                 data.append([word, nb_word])
 
@@ -185,7 +185,24 @@ for sentence in clean_sentences:
 #     print(data_word[0])
 
 
-vocab_size = len(boW)
+boW2 = []
+for data_element in data:
+    boW2.extend(data_element)
+    boW2 = list(set(boW2))
+
+print('number of words in boW2 is %d' %len(boW2))
+word2int = {}
+int2word = {}
+
+
+for i, word in enumerate(boW2):
+    word2int[word.encode('ascii', 'ignore').decode('utf-8')] = i
+    int2word[i] = word
+
+word2int.update({'0': 0})  # for padding sentences with 0
+int2word.update({'0': '0'})
+
+vocab_size = len(boW2)
 
 
 def to_one_hot(index, vocab_size):
