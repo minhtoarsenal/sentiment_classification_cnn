@@ -82,7 +82,7 @@ int2word = {}
 
 
 for i, word in enumerate(boW):
-    word2int[word] = i
+    word2int[word.encode('ascii','ignore').decode('utf-8')] = i
     int2word[i] = word
 
 word2int.update({'0': 0})  # for padding sentences with 0
@@ -199,7 +199,7 @@ y_train = []
 
 for data_word in data:
     x_train.append(to_one_hot(word2int[data_word[0]], vocab_size))
-    y_train.append(to_one_hot(word2int[data_word[1].encode('ascii', 'ignore').decode("utf-8")], vocab_size))
+    y_train.append(to_one_hot(word2int[data_word[1]], vocab_size))
 
 for data_word in data:
    print(to_one_hot(word2int[data_word[0]], vocab_size))
