@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a246db8f-cccd-42f3-a6a1-90f00c598d67" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/sentiment_classification_intern/text_cnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sentiment_classification_intern/.ipynb_checkpoints/data_processing-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sentiment_classification_intern/.ipynb_checkpoints/data_processing-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/sentiment_classification_intern/data_processing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sentiment_classification_intern/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/sentiment_classification_intern/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,48 +19,81 @@
     <session id="1899166946">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="2" />
+          <entry key="project.open.time.15" value="2" />
+          <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="2" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="2" />
+          <entry key="py" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="2" />
+          <entry key="Python" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="922" />
+          <entry key="py" value="11303" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="922" />
+          <entry key="Python" value="11303" />
         </counts>
       </usages-collector>
     </session>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Cloned-Repo" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/data_processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="221" column="54" lean-forward="true" selection-start-line="221" selection-start-column="54" selection-end-line="221" selection-end-column="54" />
+            <state relative-caret-position="-1807">
+              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <marker date="1537867566961" expanded="true" signature="6088:6094" ph="..." />
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/text_cnn.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="704">
+              <caret line="32" column="48" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+                <marker date="1538566897004" expanded="true" signature="130:135" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="175" column="29" selection-start-line="175" selection-start-column="29" selection-end-line="175" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+                <marker date="1538640967891" expanded="true" signature="1615:1620" ph="..." />
+                <marker date="1538640967891" expanded="true" signature="1615:3402" ph="..." />
               </folding>
             </state>
           </provider>
@@ -63,19 +101,39 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>train_data</find>
+      <find>embedded_chars</find>
+      <find>filter</find>
+      <find>cpu</find>
+      <find>conv2d</find>
+      <find>input_y</find>
+      <find>y_train</find>
+      <find>global_step</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sentiment_classification_intern/train.py" />
         <option value="$PROJECT_DIR$/sentiment_classification_intern/data_processing.py" />
+        <option value="$PROJECT_DIR$/sentiment_classification_intern/text_cnn.py" />
+        <option value="$PROJECT_DIR$/sentiment_classification_intern/train.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="64" />
+    <option name="x" value="714" />
     <option name="y" value="-4" />
     <option name="width" value="653" />
     <option name="height" value="773" />
@@ -85,6 +143,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -101,7 +160,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -189,12 +247,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
+    <frame x="64" y="-4" width="1303" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.22937942" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.46884274" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" weight="0.3283582" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3306581" />
@@ -203,7 +261,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3563403" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.35473517" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.670947" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -214,21 +272,47 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sentiment_classification_intern/text_cnn.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/train.py">
+    <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/data_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        <state relative-caret-position="-1807">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/data_processing.py">
+    <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/text_cnn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="221" column="54" lean-forward="true" selection-start-line="221" selection-start-column="54" selection-end-line="221" selection-end-column="54" />
+        <state relative-caret-position="704">
+          <caret line="32" column="48" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <marker date="1537867566961" expanded="true" signature="6088:6094" ph="..." />
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1538566897004" expanded="true" signature="130:135" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sentiment_classification_intern/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="175" column="29" selection-start-line="175" selection-start-column="29" selection-end-line="175" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1538640967891" expanded="true" signature="1615:1620" ph="..." />
+            <marker date="1538640967891" expanded="true" signature="1615:3402" ph="..." />
           </folding>
         </state>
       </provider>

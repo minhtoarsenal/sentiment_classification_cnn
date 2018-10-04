@@ -1,230 +1,111 @@
-import numpy as np
 import pandas as pd
-import tensorflow as tf
-import os
-import sys
 import emoji
 import string
-from nltk import sent_tokenize
+import numpy as np
 from nltk import word_tokenize
-
+from gensim.models import Word2Vec
 
 # READ DATA
-train_data = pd.read_csv('Data/train.txt', sep="### ", header=None, engine='python')
-drop_list = train_data.index[train_data[0] == 4].tolist() # list of data with label 4
-train_data = train_data.drop(train_data.index[drop_list]) # drop these rows
-train_data = train_data.reset_index(drop=True)
+def read_data(link):
+    train_data = pd.read_csv(link, sep="### ", header=None, engine='python')
+    drop_list = train_data.index[train_data[0] == 4].tolist() # list of data with label 4
+    train_data = train_data.drop(train_data.index[drop_list]) # drop these rows
+    train_data = train_data.reset_index(drop=True)
+    return train_data
 
 
-# EACH COMMENT TO SENTENCES
-all_sentences = []
-for i in range(len(train_data)):
-    tokenized = sent_tokenize(train_data[1][i])
-    for element in range(len(tokenized)):
-        all_sentences.append(tokenized[element])
-
-
-# characters that needs to be removed
-other_removal = ['0','1','2','3','4','5','6','7','8','9','«','“','”','…','»','】☛','►►','🏿','➤','◄◄','🏻','•','·','►']
-
-punctuation = list(string.punctuation)
-
-removal_character = other_removal + list(emoji.UNICODE_EMOJI.keys()) + punctuation
-
-
-# CREATE BAG OF WORDS
-boW = []
-clean_sentences = []
-
-
-def remove_character(sentence):
-    sentence_split = ""
-    for word in sentence:
-        for ch in word:
-            word = ''.join(ch for ch in word if ch not in removal_character)
-            sentence_split += word
-    return sentence_split
-
-
-def sentence2word(sentence):
+def sentence2tokens(sentence):
     tokenized = word_tokenize(sentence)
     return tokenized
 
 
-for i in range(len(all_sentences)):
-    clean_sentence = remove_character(all_sentences[i])
-    tokenized = word_tokenize(clean_sentence)
-    clean_sentences.append(tokenized)   # all clean sentences
-    for word in tokenized:
-        boW.append(word.lower())  # BoW
-
-boW = list(set(boW))
-
-# remove too long words and stop words
-long_words = []
-for ch in boW:
-    if len(ch) > 14:
-        long_words.append(ch)
-
-#vnese_stop_words = ['bị','bởi','cả','các','cái','cần','càng','chỉ','chiếc','cho','chứ','chưa','chuyện','có','có_thể','cứ',
-#                    'của','cùng','cũng','đã','đang','đây','để','đến_nỗi','đều','điều','do','đó','được','dưới','gì',
-#                    'khi','không','là','lại','lên','lúc','mà','mỗi','một_cách','này','nên','nếu','ngay','nhiều','như',
-#                    'nhưng','những','nơi','nữa','phải','qua','ra','rằng','rất','rồi','sau','sẽ','so','sự','tại','theo',
-#                    'thì','trên','trước','từ','từng','và','vẫn','vào','vậy','vì','việc','với','vừa']
+def remove_character(sentence):
+    other_removal = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '«', '“', '”', '…', '»', '】☛', '►►', '🏿', '➤',
+                     '◄◄', '🏻', '•', '·', '►']
+    punctuation = list(string.punctuation)
+    removal_character = other_removal + list(emoji.UNICODE_EMOJI.keys()) + punctuation
+    sentence_split = ""
+    for word in sentence:
+        word = ''.join(ch for ch in word if ch not in removal_character)
+        sentence_split += word
+    return sentence_split
 
 
-boW = [word for word in boW if word not in long_words]
-print('number of words in bag of words now is: %d' % len(boW))
-
-
-# word2int = {}
-# int2word = {}
-#
-#
-# for i, word in enumerate(boW):
-#     word2int[word.encode('ascii', 'ignore').decode('utf-8')] = i
-#     int2word[i] = word
-#
-# word2int.update({'0': 0})  # for padding sentences with 0
-# int2word.update({'0': '0'})  # for padding sentences with 0
-
-
-# MODIFY AND PADDING CLEAN SENTENCES
-for sentence in clean_sentences:
+def remove_longwords(sentence):
     for word in sentence:
         if len(word) > 14:
             sentence.remove(word)
 
 
-#for i in range(len(clean_sentences)):
-#    clean_sentences[i] = [word for word in clean_sentences[i] if word not in vnese_stop_words]
+def lower(sentence):
+    new_sentence = ""
+    for word in sentence:
+        new_sentence += word.lower() if any(x.isupper() for x in word) else word
+    return new_sentence
 
 
-# def check_stopwords(sentence):
-#     for word in sentence:
-#         if word in vnese_stop_words:
-#             return True
-#     return False
-#
-# count = 0
-#
-# for i in range(len(clean_sentences)):
-#     if check_stopwords(clean_sentences[i]):
-#         count += 1
-#
-# print('how many stopwords in all sentences: %d' %count)
-
-for i in range(len(clean_sentences)):
-    clean_sentences[i] = [word.lower() if any(x.isupper() for x in word) else word for word in clean_sentences[i]]
+def sentence_cleaning(sentence):
+    new_sentence = remove_character(sentence)
+    remove_longwords(new_sentence)
+    lower_sentence = lower(new_sentence)
+    tokenized = sentence2tokens(lower_sentence)
+    return tokenized
 
 
-# def check_upper(sentence):
-#     for word in sentence:
-#         for x in word:
-#             if x.isupper():
-#                 return True
-#     return False
+# CREATE BAG OF WORDS
+def createBoW(sentences):
+    bow = []
+
+    for i in range(len(sentences)):
+        for word in sentences[i]:
+            bow.append(word.lower())
+
+    bow = list(set(bow))  # remove duplicate
+    return bow
 
 
-# count_upper = 0
-# for i in range(len(clean_sentences)):
-#     if check_upper(clean_sentences[i]):
-#         count_upper += 1
-#
-# print('how many upper words: %d' %count_upper)
+# PADDING + CHOPPING CLEAN SENTENCES
 
 
-# def longest_sentence(sentences):
-#     position = 0
-#     longest = 0
-#     for num, sentence in enumerate(sentences):
-#         if len(sentences[num]) > longest:
-#             longest = len(sentences[num])
-#             position = num
-#
-#     return position, longest
+#longest_length = 50
 
 
-# def longest_word(sentences):
-#     longest_word_length = 0
-#     long_word = ""
-#     for sentence in sentences:
-#         for word in sentence:
-#             if len(word) > longest_word_length:
-#                 longest_word_length = len(word)
-#                 long_word = word
-#     return long_word
-#
-# print('the longest word is %s' %(longest_word(clean_sentences)))
-# pos, longest_num = longest_sentence(clean_sentences)
-# print('pos is %d, longest_num is %d' % longest_sentence(clean_sentences))
-#print(clean_sentences[2135])
-
-def pad(sentences, longest):
+def padORchop(sentences, longest):
     for i in range(len(sentences)):
         if len(sentences[i]) < longest:
             for j in range(longest - len(sentences[i])):
                 sentences[i] += '0'
+        if len(sentences[i]) > longest:
+            sentences[i] = sentences[i][:50]
 
 
-#pad(clean_sentences, longest_num)
+# padORchop(clean_sentences, longest_length)
 
 
-data = []
-
-window_size = 2
-
-for sentence in clean_sentences:
-    for word_index, word in enumerate(sentence):
-        for nb_word in sentence[max(word_index - window_size, 0): min(word_index + window_size, len(sentence)) + 1]:
-            if nb_word != word:
-                data.append([word, nb_word])
-
-
-# for data_word in data:
-#     print(data_word[0])
+# model = Word2Vec(clean_sentences, min_count=1, window=2, size=300, workers=20)
+#
+# model.wv.save_word2vec_format('model.txt', binary=False)
+#
+# model.save('model.bin')
+#
+# new_model = Word2Vec.load('model.bin')
+#
+# print(new_model)
 
 
-boW2 = []
-for data_element in data:
-    boW2.extend(data_element)
-    boW2 = list(set(boW2))
-
-print('number of words in boW2 is %d' %len(boW2))
-word2int = {}
-int2word = {}
-
-
-for i, word in enumerate(boW2):
-    word2int[word.encode('ascii', 'ignore').decode('utf-8')] = i
-    int2word[i] = word
-
-word2int.update({'0': 0})  # for padding sentences with 0
-int2word.update({'0': '0'})
-
-vocab_size = len(boW2)
-
-
-def to_one_hot(index, vocab_size):
-   temp = np.zeros(vocab_size)
-   temp[index] = 1
-   return temp
-
-
-x_train = []
-y_train = []
-
-for data_word in data:
-    x_train.append(to_one_hot(word2int[data_word[0]], vocab_size))
-    y_train.append(to_one_hot(word2int[data_word[1]], vocab_size))
-
-for data_word in data:
-   print(to_one_hot(word2int[data_word[0]], vocab_size))
-
-
-
-
-
-
-
+def batch_iter(data, batch_size, num_epochs, shuffle=True):
+    data = np.array(data)
+    data_size = len(data)
+    num_batches_per_epoch = int((len(data)-1)/batch_size) + 1
+    for epoch in range(num_epochs):
+        # Shuffle the data at each epoch
+        if shuffle:
+            shuffle_indices = np.random.permutation(np.arange(data_size))
+            shuffled_data = data[shuffle_indices]
+        else:
+            shuffled_data = data
+        for batch_num in range(num_batches_per_epoch):
+            start_index = batch_num * batch_size
+            end_index = min((batch_num + 1) * batch_size, data_size)
+            yield shuffled_data[start_index:end_index]
 
